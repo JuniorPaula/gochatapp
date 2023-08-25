@@ -8,6 +8,61 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <title>Golang Chatapp</title>
+
+    <style>
+        input[type="text"] {
+            border-radius: 0;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"]:focus {
+            outline:0 !important;
+            border-color: #007bff;
+        }
+
+        .chatbox {
+            height: 400px;
+            overflow-y: scroll;
+        }
+
+        .chatbox::-webkit-scrollbar {
+            width: 0.5em;
+        }
+
+        .chatbox::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+
+        .chatbox::-webkit-scrollbar-thumb {
+            background-color: #888;
+        }
+
+        .chatbox::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .chatbox p {
+            margin-bottom: 0;
+        }
+
+        .chatbox p span {
+            font-weight: bold;
+        }
+
+        .chatbox p span.username {
+            color: #007bff;
+        }
+
+        .chatbox p span.message {
+            color: #28a745;
+        }
+
+        .chatbox p span.message {
+            color: #28a745;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -21,8 +76,25 @@
         <div class="row mt-4">
             <div class="col-md-8">
                 <h3>Chat</h3>
+
+                <div class="form-group">
+                    <label for="usename">Username:</label>
+                    <input type="text" name="username" id="username" class="form-control" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <input type="text" name="message" id="message" class="form-control" autocomplete="off">
+                </div>
+
+                <input type="hidden" name="action" id="action">
+
+                <hr>
+
+                <div id="output" class="chatbox">
+
+                </div>
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <h3>Who's online</h3>
             </div>
         </div>
@@ -41,6 +113,18 @@
 
         socket.onopen = (e) => {
             console.log("Connection established");
+        }
+
+        socket.onclose = (e) => {
+            console.log("Connection closed");
+        }
+
+        socket.onerror = (e) => {
+            console.log("Error occured");
+        }
+
+        socket.onmessage = msg => {
+            console.log(msg)
         }
     })
 </script>

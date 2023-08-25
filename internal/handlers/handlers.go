@@ -31,11 +31,24 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// WebSocketConnection is a wrapper around the websocket.Conn type.
+type WebSocketConnection struct {
+	*websocket.Conn
+}
+
 // WsJSONResponse is the response sent to the client when a websocket event occurs.
 type WsJSONResponse struct {
 	Action      string `json:"action"`
 	Message     string `json:"message"`
 	MessageType string `json:"message_type"`
+}
+
+// WsPayload is the payload sent to the server when a websocket event occurs.
+type WsPayload struct {
+	Action   string              `json:"action"`
+	Username string              `json:"username"`
+	Message  string              `json:"message"`
+	Conn     WebSocketConnection `json:"conn"`
 }
 
 // WsEndpoint upgrades connection to websocket.
