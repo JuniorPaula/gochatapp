@@ -2,6 +2,10 @@
 
 The **Go WebSocket Chat Application** is a project that demonstrates the implementation of a chat application using WebSockets in the Go programming language. It leverages channels to manage socket connections and facilitate real-time communication between users.
 
+<div align="center">
+   <img src="https://repository-images.githubusercontent.com/685168998/be4ee91f-0dc7-4876-aa8d-e8cbbc661fe6" width="720" />
+</div>
+
 ## Features
 
 - **Real-Time Chat**: Users can connect to the chat server using a WebSocket connection and send messages in real time.
