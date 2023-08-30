@@ -13,6 +13,32 @@
     <title>Golang Chatapp</title>
 
     <style>
+        body {
+            background-color: #eeeeee;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .online_users {
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .online_users h3 {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        #online_users li {
+            padding: 5px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
         input[type="text"] {
             border-radius: 0;
             outline: none;
@@ -26,8 +52,10 @@
 
         .chatbox {
             border: 1px solid #ccc;
+            background-color: #fff;
             height: 400px;
             overflow-y: scroll;
+            padding: 5px 10px;
         }
 
         .chatbox::-webkit-scrollbar {
@@ -35,7 +63,7 @@
         }
 
         .chatbox::-webkit-scrollbar-track {
-            background-color: #f1f1f1;
+            background-color: #4c92dd;
         }
 
         .chatbox::-webkit-scrollbar-thumb {
@@ -61,10 +89,6 @@
         .chatbox p span.message {
             color: #28a745;
         }
-
-        .chatbox p span.message {
-            color: #28a745;
-        }
     </style>
 </head>
 
@@ -72,17 +96,13 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 class="my-3 text-center">This is the <strong>Home</strong> page</h1>
+                <h1 class="mt-3 text-center text-primary">Go<strong class="text-black">Chat</strong>App</h1>
             </div>
         </div>
         <hr>
-        <div class="row mt-4">
+        <div class="row mt-3">
             <div class="col-md-8">
                 <h3>Chat</h3>
-
-                <p>
-                    <a href="https://github.com">Go to Github</a>
-                </p>
 
                 <div class="form-group">
                     <label for="usename">Username:</label>
@@ -93,9 +113,8 @@
                     <input type="text" name="message" id="message" class="form-control" autocomplete="off">
                 </div>
 
-                <hr>
                 <input type="hidden" name="action" id="action">
-                <div class="mb-3">
+                <div class="my-3">
                     <a href="javascript:void(0);" class="btn btn-sm btn-secondary" id="sendBtn">Send Message</a>
                     <span id="status" class="mt-2 float-end"></span>
                 </div>
@@ -104,7 +123,7 @@
 
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 online_users">
                 <h3>Who's online</h3>
 
                 <ul id="online_users"></ul>
@@ -178,7 +197,7 @@
                     break;
 
                 case "broadcast":
-                    outputChatbox.innerHTML = outputChatbox.innerHTML + data.message + "<br />";
+                    outputChatbox.innerHTML = outputChatbox.innerHTML + data.message;
                     break;
             }
         }
