@@ -25,6 +25,7 @@
         }
 
         .chatbox {
+            border: 1px solid #ccc;
             height: 400px;
             overflow-y: scroll;
         }
@@ -93,11 +94,11 @@
                 </div>
 
                 <hr>
-                <a href="javascript:void(0);" class="btn btn-sm btn-secondary" id="sendBtn">Send Message</a>
-
                 <input type="hidden" name="action" id="action">
-
-                <hr>
+                <div class="mb-3">
+                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary" id="sendBtn">Send Message</a>
+                    <span id="status" class="mt-2 float-end"></span>
+                </div>
 
                 <div id="output" class="chatbox">
 
@@ -137,16 +138,23 @@
     document.addEventListener("DOMContentLoaded", function () {
         socket = new ReconnectingWebSocket("ws://localhost:4000/ws", null, { debug: true, reconnectInterval: 3000 });
 
+        const offline = `<span class="badge bg-danger">Offline</span>`;
+        const online = `<span class="badge bg-success">Online</span>`;
+        let statusDiv = document.getElementById("status");
+
         socket.onopen = (e) => {
             console.log("Connection established");
+            statusDiv.innerHTML = online;
         }
 
         socket.onclose = (e) => {
             console.log("Connection closed");
+            statusDiv.innerHTML = offline;
         }
 
         socket.onerror = (e) => {
             console.log("Error occured");
+            statusDiv.innerHTML = offline;
         }
 
         socket.onmessage = msg => {
